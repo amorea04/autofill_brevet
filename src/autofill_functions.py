@@ -8,10 +8,6 @@ from pypdf import PdfMerger
 import img2pdf
 from PIL import Image, ImageFont, ImageDraw
 
-# import pandas as pd
-# import fitz
-# import datetime
-
 # %% Constants
 ROOT_DIR = "docs/"
 
@@ -24,7 +20,6 @@ FILE_NAME_EPREUVE_VOL = "0_35formexa.jpg"
 
 
 # %% Functions
-
 
 # %%% Suppression des anciens fichiers
 def delete_old_files() -> None:
