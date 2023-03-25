@@ -10,12 +10,12 @@ import img2pdf
 from PIL import Image, ImageFont, ImageDraw
 
 # %% Constants
-if getattr(sys, 'frozen', False):
-    ROOT_DIR = os.path.join(sys._MEIPASS, 'docs/')
+## Utilisation de sys.MEIPASS afin de retrouver le chemin du dossier docs dans l'application. sinon, on utilise le chemin "classique".
+if getattr(sys, "frozen", False):
+    ROOT_DIR = os.path.join(sys._MEIPASS, "docs/")
 else:
     ROOT_DIR = "docs/"
 ROOT_DOWNLOADS_DIR = os.path.expanduser("~/Downloads/")
-#print(ROOT_DIR, ROOT_DOWNLOADS_DIR)
 
 FNT_FILE = "0_arial.ttf"
 
@@ -741,7 +741,7 @@ def annotate_all_pdfs(dict_text: dict) -> None:
     if "attest_provisoire" not in dict_text["docs_to_fill"]:
         final_filled_filenames.remove(utils_attest_provisoire["filename_final"])
 
-    #delete_old_files()
+    # delete_old_files()
 
     if "debut_formation" in dict_text["docs_to_fill"]:
         annotate_single_pdf(
