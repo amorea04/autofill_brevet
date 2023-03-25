@@ -21,6 +21,7 @@ FILE_NAME_EPREUVE_VOL = "0_35formexa.jpg"
 
 # %% Functions
 
+
 # %%% Suppression des anciens fichiers
 def delete_old_files() -> None:
     filenames_in_docs = os.listdir(ROOT_DIR)

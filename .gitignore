@@ -7,3 +7,7 @@
 /.vscode
 .bashrc
 utils_activate_env.txt
+/build
+/dist
+/__pycache__
+src/__pycache__/
