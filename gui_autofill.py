@@ -34,7 +34,7 @@ class App(customtkinter.CTk):
         # configure window
         self.title("Création des documents")
         self.geometry(f"{1300}x{850}")
-        customtkinter.set_widget_scaling(1.2)
+        customtkinter.set_widget_scaling(1.1)
 
         # configure grid layout (4x4)
         self.grid_columnconfigure(1, weight=1)
@@ -150,7 +150,16 @@ class App(customtkinter.CTk):
             value=1,
             text="Multiaxe",
         )
-        self.radio_button_2_type_ulm.grid(row=2, column=2, pady=5, padx=10, sticky="nw")
+        self.radio_button_2_type_ulm.grid(
+            row=2, column=2, pady=(5, 5), padx=10, sticky="nw"
+        )
+        self.radio_button_3_type_ulm = customtkinter.CTkRadioButton(
+            master=self.radiobutton_frame_sbar_type_ulm,
+            variable=self.radio_var_type_ulm,
+            value=2,
+            text="Autogire",
+        )
+        self.radio_button_3_type_ulm.grid(row=3, column=2, pady=5, padx=10, sticky="nw")
 
         # %%% Création d'une quatrième frame pour checkbox --> emport passager?
         self.checkbox_frame_sbar_ep = customtkinter.CTkFrame(self.sidebar_frame)
@@ -163,7 +172,13 @@ class App(customtkinter.CTk):
             text="Emport passager",
             command=self.get_check_box_status,
         )
-        self.checkbox_1_ep.grid(row=1, column=0, pady=(10, 10), padx=10, sticky="nw")
+        self.checkbox_1_ep.grid(row=1, column=0, pady=(5, 5), padx=(10), sticky="nw")
+        self.checkbox_2_ep = customtkinter.CTkCheckBox(
+            master=self.checkbox_frame_sbar_ep,
+            text="Radio",
+            command=self.get_check_box_status,
+        )
+        self.checkbox_2_ep.grid(row=2, column=0, pady=(0, 5), padx=10, sticky="nw")
 
         # %%% Création d'une Sixième frame pour checkbox --> type documents à créer ?
         self.docs_to_fill = {"debut_formation", "ep_sol", "ep_vol", "attest_provisoire"}
@@ -306,7 +321,12 @@ class App(customtkinter.CTk):
             textvariable=self.var_date_deb_attest_provisoire,
         )
         self.entry_date_deb_attest_provisoire.grid(
-            row=4, column=0, padx=(10, 0), pady=(0, 0), sticky="nsew"
+            # row=4, column=0, padx=(10, 0), pady=(0, 0), sticky="nsew"
+            row=4,
+            column=0,
+            padx=(10, 0),
+            pady=(0, 10),
+            sticky="nsew",
         )
         self.label_date_ep_sol = customtkinter.CTkLabel(
             master=self.frame_dates,
@@ -338,24 +358,29 @@ class App(customtkinter.CTk):
             textvariable=self.var_date_ep_vol,
         )
         self.entry_date_ep_vol.grid(
-            row=4, column=2, padx=(10, 10), pady=(0, 0), sticky="nsew"
+            # row=4, column=2, padx=(10, 10), pady=(0, 0), sticky="nsew"
+            row=4,
+            column=2,
+            padx=(10, 0),
+            pady=(0, 10),
+            sticky="nsew",
         )
-        self.label_fait_le = customtkinter.CTkLabel(
-            master=self.frame_dates,
-            text="Fait le :",
-            anchor="sw",
-        )
-        self.label_fait_le.grid(row=5, column=0, padx=10, pady=(5, 0), sticky="w")
-        self.var_fait_le = tkinter.StringVar(
-            value=f"{datetime.datetime.now().strftime('%d/%m/%Y')}"
-        )
-        self.entry_fait_le = customtkinter.CTkEntry(
-            self.frame_dates,
-            textvariable=self.var_fait_le,
-        )
-        self.entry_fait_le.grid(
-            row=6, column=0, padx=(10, 0), pady=(0, 10), sticky="nsew"
-        )
+        # self.label_fait_le = customtkinter.CTkLabel(
+        #    master=self.frame_dates,
+        #    text="Fait le :",
+        #    anchor="sw",
+        # )
+        # self.label_fait_le.grid(row=5, column=0, padx=10, pady=(5, 0), sticky="w")
+        # self.var_fait_le = tkinter.StringVar(
+        #    value=f"{datetime.datetime.now().strftime('%d/%m/%Y')}"
+        # )
+        # self.entry_fait_le = customtkinter.CTkEntry(
+        #    self.frame_dates,
+        #    textvariable=self.var_fait_le,
+        # )
+        # self.entry_fait_le.grid(
+        #    row=6, column=0, padx=(10, 0), pady=(0, 10), sticky="nsew"
+        # )
 
         # %%%% Le candidat
         self.frame_candidat = customtkinter.CTkFrame(
@@ -583,7 +608,7 @@ class App(customtkinter.CTk):
         self.var_mail_instructeur = tkinter.StringVar(value="ckchiron@yahoo.fr")
         self.var_numero_licence = tkinter.StringVar(value="0305004006")
         self.var_numero_qualification = tkinter.StringVar(value="ULM 0300004006")
-        self.var_date_val_qualification = tkinter.StringVar(value="31/07/2023")
+        self.var_date_val_qualification = tkinter.StringVar(value="31/07/2026")
         self.var_date_val_licence = tkinter.StringVar(value="-----------")
         self.var_aeorclub_assos = tkinter.StringVar(value="Air Race Pro")
         self.var_lieu_redaction = tkinter.StringVar(value="Voeuil-et-Giget")
@@ -725,7 +750,7 @@ class App(customtkinter.CTk):
         )
         self.label_lieu_redaction = customtkinter.CTkLabel(
             master=self.frame_instructeur,
-            text="Aéroclub/Association :",
+            text="Fait à :",
             anchor="sw",
         )
         self.label_lieu_redaction.grid(
@@ -803,16 +828,24 @@ class App(customtkinter.CTk):
             values_to_fill["type_ulm"] = "Paramoteur"
         elif self.radio_var_type_ulm.get() == 1:
             values_to_fill["type_ulm"] = "Multiaxe"
+        elif self.radio_var_type_ulm.get() == 2:
+            values_to_fill["type_ulm"] = "Autogire"
         if values_to_fill["type_ulm"] == "Paramoteur":
             values_to_fill["classe_ulm"] = "1 (Paramoteur)"
         elif values_to_fill["type_ulm"] == "Multiaxe":
             values_to_fill["classe_ulm"] = "3 (Multiaxe)"
+        elif values_to_fill["type_ulm"] == "Autogire":
+            values_to_fill["classe_ulm"] = "4 (Autogire)"
         else:
             values_to_fill["classe_ulm"] = ""
         if self.checkbox_1_ep.get() == 1:
             values_to_fill["emport_pass_or_not"] = ["Emport de passager"]
         else:
             values_to_fill["emport_pass_or_not"] = []
+        if self.checkbox_2_ep.get() == 1:
+            values_to_fill["radio"] = ["radio"]
+        else:
+            values_to_fill["radio"] = []
         values_to_fill["date_deb_formation"] = self.entry_date_deb_formation.get()
         values_to_fill["date_ep_sol"] = self.entry_date_ep_sol.get()
         values_to_fill["date_ep_vol"] = self.entry_date_ep_vol.get()
@@ -823,7 +856,7 @@ class App(customtkinter.CTk):
             pd.to_datetime(values_to_fill["date_deb_attest_provisoire"], dayfirst=True)
             + datetime.timedelta(days=56)
         ).strftime("%d/%m/%Y")
-        values_to_fill["fait_le"] = self.entry_fait_le.get()
+        # values_to_fill["fait_le"] = self.entry_fait_le.get()
         values_to_fill["nom_candidat"] = self.entry_nom_candidat.get()
         values_to_fill["prenom_candidat"] = self.entry_prenom_candidat.get()
         values_to_fill["nom_usage_candidat"] = self.entry_nom_usage_candidat.get()

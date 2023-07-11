@@ -61,7 +61,7 @@ coll = COLLECT(
 )
 app = BUNDLE(
     coll,
-    name='Brevet_ulm.app',
+    name='Air_Race_Brevet.app',
     icon='logo0.ico',
     bundle_identifier=None,
 )

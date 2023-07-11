@@ -187,7 +187,7 @@ def create_utils(dict_create_utils: dict) -> tuple[dict]:
             (590, 5954, 1143, 6256),
         ],
         ((590 + 10), (6256 + (6610 - 6256) / 2)): [
-            f"{dict_create_utils['fait_le']}",
+            f"{dict_create_utils['date_deb_formation']}",
             (590, 6256, 1143, 6610),
         ],
     }
@@ -314,15 +314,15 @@ def create_utils(dict_create_utils: dict) -> tuple[dict]:
             (740, 5965, 1680, 6055),
         ],  # Fait a
         ((1760 + 10), (5965 + ((6055 - 5965) / 2))): [
-            f"{dict_create_utils['fait_le'][0:2]}",
+            f"{dict_create_utils['date_ep_sol'][0:2]}",
             (1760, 5965, 1910, 6055),
         ],  # fait le 1
         ((1940 + 10), (5965 + ((6055 - 5965) / 2))): [
-            f"{dict_create_utils['fait_le'][3:5]}",
+            f"{dict_create_utils['date_ep_sol'][3:5]}",
             (1940, 5965, 2050, 6055),
         ],  # fait le 2
         ((2170 + 10), (5965 + ((6055 - 5965) / 2))): [
-            f"{dict_create_utils['fait_le'][8:]}",
+            f"{dict_create_utils['date_ep_sol'][8:]}",
             (2170, 5965, 2285, 6055),
         ],  # fait le 3
     }
@@ -449,15 +449,15 @@ def create_utils(dict_create_utils: dict) -> tuple[dict]:
             (740, 5750, 1680, 5840),
         ],  # Fait a
         ((1760 + 10), (5750 + ((5840 - 5750) / 2))): [
-            f"{dict_create_utils['fait_le'][0:2]}",
+            f"{dict_create_utils['date_ep_vol'][0:2]}",
             (1760, 5750, 1910, 5840),
         ],  # fait le 1
         ((1940 + 10), (5750 + ((5840 - 5750) / 2))): [
-            f"{dict_create_utils['fait_le'][3:5]}",
+            f"{dict_create_utils['date_ep_vol'][3:5]}",
             (1940, 5750, 2050, 5840),
         ],  # fait le 2
         ((2170 + 10), (5750 + ((5840 - 5750) / 2))): [
-            f"{dict_create_utils['fait_le'][8:]}",
+            f"{dict_create_utils['date_ep_vol'][8:]}",
             (2170, 5750, 2285, 5840),
         ],  # fait le 3
     }
@@ -566,6 +566,10 @@ def add_annotations_boxes_ep_vol(
             image_editable.rectangle(
                 (450, 4500, 520, 4580), outline="black", fill="black"
             )  # fill_multiaxe_brevet
+        elif dict_create_boxes["type_ulm"] == "Autogire":
+            image_editable.rectangle(
+                (2075, 4500, 2145, 4580), outline="black", fill="black"
+            )  # fill_autogire_brevet
     elif dict_create_boxes["brevet_init_or_not"] == "Ajout classe":
         image_editable.rectangle(
             (410, 4150, 500, 4230), outline="black", fill="black"
@@ -585,6 +589,10 @@ def add_annotations_boxes_ep_vol(
                 image_editable.rectangle(
                     (450, 5010, 520, 5090), outline="black", fill="black"
                 )  # fill_multiaxe_emport
+            elif dict_create_boxes["type_ulm"] == "Autogire":
+                image_editable.rectangle(
+                    (2075, 5010, 2145, 5090), outline="black", fill="black"
+                )  # fill_autogire_emport
         else:
             image_editable.rectangle(
                 (650, 4240, 735, 4340), outline="black", fill="black"
@@ -597,6 +605,14 @@ def add_annotations_boxes_ep_vol(
                 image_editable.rectangle(
                     (450, 4500, 520, 4580), outline="black", fill="black"
                 )  # fill_multiaxe_brevet
+            elif dict_create_boxes["type_ulm"] == "Autogire":
+                image_editable.rectangle(
+                    (2075, 4500, 2145, 4580), outline="black", fill="black"
+                )  # fill_autogire_brevet
+    if dict_create_boxes["radio"] == ["radio"]:
+        image_editable.rectangle(
+            (650, 5415, 735, 5495), outline="black", fill="black"
+        )  # aptitude radio
 
     return img
 
@@ -636,6 +652,10 @@ def add_annotations_boxes_ep_sol(
             image_editable.rectangle(
                 (450, 4490, 520, 4575), outline="black", fill="black"
             )  # fill_multiaxe_brevet
+        elif dict_create_boxes["type_ulm"] == "Autogire":
+            image_editable.rectangle(
+                (2075, 4490, 2145, 4575), outline="black", fill="black"
+            )  # fill_autogire_brevet
     elif dict_create_boxes["brevet_init_or_not"] == "Ajout classe":
         image_editable.rectangle(
             (410, 4130, 500, 4230), outline="black", fill="black"
@@ -655,6 +675,10 @@ def add_annotations_boxes_ep_sol(
                 image_editable.rectangle(
                     (450, 5050, 520, 5130), outline="black", fill="black"
                 )  # fill_multiaxe_emport
+            elif dict_create_boxes["type_ulm"] == "Autogire":
+                image_editable.rectangle(
+                    (2075, 5050, 2145, 5130), outline="black", fill="black"
+                )  # fill_autogire_emport
         else:
             image_editable.rectangle(
                 (650, 4230, 735, 4330), outline="black", fill="black"
@@ -667,6 +691,14 @@ def add_annotations_boxes_ep_sol(
                 image_editable.rectangle(
                     (450, 4490, 520, 4575), outline="black", fill="black"
                 )  # fill_multiaxe_brevet
+            elif dict_create_boxes["type_ulm"] == "Autogire":
+                image_editable.rectangle(
+                    (2075, 4490, 2145, 4575), outline="black", fill="black"
+                )  # fill_autogire_brevet
+    if dict_create_boxes["radio"] == ["radio"]:
+        image_editable.rectangle(
+            (650, 5555, 735, 5635), outline="black", fill="black"
+        )  # aptitude radio
 
     return img
 
